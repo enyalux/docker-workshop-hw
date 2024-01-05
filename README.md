@@ -9,8 +9,16 @@ If command not found:
 python3 -m pip install --user virtualenv
 
 in Windows:
-.\venv\Scripts\activate
+.\.venv\Scripts\activate
 
 In Linux or Mac:
-source env_name/bin/activate
+source .venv/bin/activate
 
+
+Install dependencies:
+
+pip3 install -r requirements.txt
+
+Run app:
+
+python app.py

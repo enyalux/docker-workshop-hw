@@ -1,12 +1,15 @@
 from flask import Flask, request, flash, url_for, redirect, render_template
 from flask_sqlalchemy import SQLAlchemy
 import json
+import os
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///students.sqlite3'
 app.config['SECRET_KEY'] = "random string"
 
 db = SQLAlchemy(app)
+
+BG_COLOR = os.environ.get("BG_COLOR", "white")
 
 
 class Students(db.Model):
@@ -25,7 +28,8 @@ class Students(db.Model):
 
 @app.route('/')
 def show_all():
-    return render_template('show_all.html', students=Students.query.all())
+    return render_template('show_all.html', context={"students": Students.query.all(),
+                                                     "bgcolor": BG_COLOR})
 
 
 @app.route('/new', methods=['GET', 'POST'])
@@ -42,6 +46,7 @@ def new():
             flash('Record was successfully added')
             return redirect(url_for('show_all'))
     return render_template('new.html')
+
 
 @app.route('/health')
 def health():
