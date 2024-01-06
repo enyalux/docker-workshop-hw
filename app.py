@@ -1,5 +1,6 @@
 from flask import Flask, request, flash, url_for, redirect, render_template
 from flask_sqlalchemy import SQLAlchemy
+import psycopg2
 import json
 import os
 
@@ -13,6 +14,8 @@ BG_COLOR = os.environ.get("BG_COLOR", "white")
 
 
 class Students(db.Model):
+    __tablename__ = "students"
+
     id = db.Column('student_id', db.Integer, primary_key=True)
     name = db.Column(db.String(100))
     city = db.Column(db.String(50))
@@ -53,7 +56,9 @@ def health():
     return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
 
 
+with app.app_context():
+    db.create_all()
+    db.session.commit()
+
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
     app.run(debug=True)
