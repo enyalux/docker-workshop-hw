@@ -1,0 +1,35 @@
+version: "3.1"
+services:
+  flask:
+    image: my-app:1.0
+    build:
+      context: .
+    ports:
+      - "3000:5000"
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: postgres:16.1-alpine3.19
+    user: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+    environment:
+      - POSTGRES_LOGIN=postgres
+      - POSTGRES_PASSWORD=querty123
+      - POSTGRES_DB=students
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready']
+      interval: 10s
+      timeout: 5s
+      retries: 5 
+  pg_admin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@google.com
+      - PGADMIN_DEFAULT_PASSWORD=pass123
+    ports:
+      - "82:80"
+volumes:
+  postgres_data:

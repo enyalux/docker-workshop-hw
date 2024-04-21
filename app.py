@@ -1,11 +1,12 @@
 from flask import Flask, request, flash, url_for, redirect, render_template
 from flask_sqlalchemy import SQLAlchemy
-# import psycopg2
+import psycopg2 #command for sqlite
 import json
 import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///students.sqlite3'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///students.sqlite3'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:querty123@db:5432/students'
 app.config['SECRET_KEY'] = "random string"
 
 db = SQLAlchemy(app)
