@@ -1,0 +1,7 @@
+#Create namespace
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev-myapp
+  labels:
+    name: dev-myapp

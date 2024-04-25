@@ -1,0 +1,36 @@
+#Create app pod
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp
+  namespace: dev-myapp
+  labels:
+    name: myapp
+spec:
+  containers:
+  - name: myapp
+    image: marcheol/my-app:1.0
+    ports:
+    - containerPort: 5000
+    resources:
+
+#Service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp
+  namespace: dev-myapp
+  labels:
+    app: myapp
+spec:
+  ports:
+  - port: 3000
+    targetPort: 5000
+    name: myapp
+  clusterIP: None
+  selector:
+    app: myapp
+
+#Deployment
