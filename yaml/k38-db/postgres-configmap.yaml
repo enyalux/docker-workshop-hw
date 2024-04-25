@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-secret
+  labels:
+    app: postgres
+data:
+  POSTGRES_DB: students
+  POSTGRES_USER: postgres
+  POSTGRES_LOGIN: postgres
+  POSTGRES_PASSWORD: querty123

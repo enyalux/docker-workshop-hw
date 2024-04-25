@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: st-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: st-app
+  template:
+    metadata:
+      labels:
+        app: st-app
+    spec:
+      containers:
+        - name: st-app
+          image: 'my-app:1.0'
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5000
+          envFrom:
+            - configMapRef:
+                name: app-secret
