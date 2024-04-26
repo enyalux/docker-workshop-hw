@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: my-app
+  namespace: dev-myapp
 spec:
   replicas: 1
   selector:
@@ -14,7 +15,7 @@ spec:
     spec:
       containers:
         - name: my-app
-          image: 'my-app:1.0'
+          image: 'marcheol/my-app:1.0'
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5000
