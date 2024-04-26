@@ -3,7 +3,7 @@ kind: Service
 metadata:
   #name: postgres
   name: db
-  namespace: dev-myapp
+  namespace: dev
   labels:
     app: db
 spec:
