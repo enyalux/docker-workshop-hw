@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: app-secret
   labels:
-    app: st-app
+    app: my-app
 data:
   POSTGRES_DB: students
   POSTGRES_USER: postgres
