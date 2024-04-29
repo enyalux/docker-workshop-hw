@@ -22,3 +22,10 @@ spec:
           envFrom:
             - configMapRef:
                 name: app-secret
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "75m"
+            limits:
+              memory: "128Mi"
+              cpu: "100m"
